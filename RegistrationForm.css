@@ -1,0 +1,733 @@
+/* =============================================================================
+   RegistrationForm.css — Full registration page styles
+   ============================================================================= */
+
+/* ── Page Shell ───────────────────────────────────────────────────────────── */
+.reg-page {
+  min-height: 100svh;
+  background: var(--black-soft);
+  padding-top: 5rem; /* nav clearance */
+  position: relative;
+}
+
+/* Subtle orange ambient light top-center */
+.reg-page::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 300px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(255,92,26,0.07) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.reg-container {
+  position: relative;
+  z-index: 1;
+  padding-block: var(--space-xl);
+}
+
+/* ── Page Header ──────────────────────────────────────────────────────────── */
+.reg-header {
+  margin-bottom: var(--space-xl);
+  animation: fadeUp 0.6s var(--ease-out-expo) both;
+}
+
+.reg-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fog);
+  margin-bottom: 2rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid transparent;
+  transition: color var(--t-fast), border-color var(--t-fast);
+  width: fit-content;
+}
+
+.reg-back-link:hover {
+  color: var(--orange);
+  border-color: var(--orange);
+}
+
+.reg-page-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 6rem);
+  line-height: 0.9;
+  text-transform: uppercase;
+  color: var(--white);
+  letter-spacing: -0.01em;
+}
+
+.reg-page-title span { color: var(--orange); }
+
+.reg-page-sub {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: var(--fog);
+  max-width: 480px;
+  line-height: 1.65;
+}
+
+/* ── Layout — two-column with sticky sidebar ──────────────────────────────── */
+.reg-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* ── Sidebar ──────────────────────────────────────────────────────────────── */
+.reg-sidebar {
+  position: sticky;
+  top: 5.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  animation: slideInRight 0.7s var(--ease-out-expo) 0.2s both;
+}
+
+.sidebar-card {
+  background: var(--black-muted);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 4px;
+  padding: 1.5rem;
+}
+
+.sidebar-card-title {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebar-card-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+}
+
+/* Team size meter */
+.team-meter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.team-meter-bar-wrap {
+  display: flex;
+  gap: 5px;
+}
+
+.meter-slot {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255,255,255,0.08);
+  transition: background var(--t-med), box-shadow var(--t-med);
+}
+
+.meter-slot.captain {
+  background: var(--orange);
+  box-shadow: 0 0 8px rgba(255,92,26,0.5);
+}
+
+.meter-slot.filled {
+  background: var(--lime);
+  box-shadow: 0 0 8px rgba(200,241,53,0.4);
+}
+
+.meter-slot.required {
+  border: 1px dashed var(--fog);
+  background: transparent;
+}
+
+.team-meter-count {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  color: var(--white);
+  line-height: 1;
+}
+
+.team-meter-count span { color: var(--fog); font-size: 1.5rem; }
+
+.team-meter-status {
+  font-size: 0.8rem;
+  color: var(--fog);
+  line-height: 1.5;
+}
+
+.team-meter-status strong { color: var(--lime); font-weight: 600; }
+
+/* Gender split */
+.gender-split {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.gender-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.gender-label {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fog);
+}
+
+.gender-count {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.gender-min-note {
+  font-size: 0.75rem;
+  color: var(--fog);
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.gender-min-note.warning {
+  color: #FFB347;
+}
+
+.gender-bar-track {
+  flex: 1;
+  height: 4px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.gender-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width var(--t-med);
+}
+
+.gender-bar-fill.male   { background: var(--lime); }
+.gender-bar-fill.female { background: var(--orange); }
+
+/* Quick facts */
+.quick-facts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.quick-fact {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.82rem;
+  color: var(--fog);
+  line-height: 1.5;
+}
+
+.quick-fact-icon {
+  color: var(--orange);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ── Form Main Area ───────────────────────────────────────────────────────── */
+.reg-form-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: slideInLeft 0.7s var(--ease-out-expo) 0.1s both;
+}
+
+/* ── Form Section Card ────────────────────────────────────────────────────── */
+.form-section {
+  background: var(--black-muted);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: border-color var(--t-med);
+}
+
+.form-section:focus-within {
+  border-color: var(--border-orange);
+}
+
+.form-section-head {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  background: rgba(255,255,255,0.02);
+}
+
+.form-section-num {
+  width: 36px;
+  height: 36px;
+  background: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--white);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.form-section-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.form-section-subtitle {
+  font-size: 0.8rem;
+  color: var(--fog);
+  margin-top: 0.15rem;
+}
+
+.form-section-body {
+  padding: 2rem;
+}
+
+/* ── Form Grid ────────────────────────────────────────────────────────────── */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.form-grid-full { grid-column: 1 / -1; }
+
+/* ── Form Field ───────────────────────────────────────────────────────────── */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-field-label {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fog);
+  transition: color var(--t-fast);
+}
+
+.form-field:focus-within .form-field-label {
+  color: var(--orange);
+}
+
+/* Input wrapper — contains icon + input */
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 1rem;
+  color: var(--ash);
+  pointer-events: none;
+  transition: color var(--t-fast);
+  z-index: 1;
+}
+
+.form-field:focus-within .input-icon { color: var(--orange); }
+
+.form-input,
+.form-select {
+  width: 100%;
+  background: var(--black-soft);
+  border: 1.5px solid rgba(255,255,255,0.08);
+  border-radius: 3px;
+  padding: 0.85rem 1rem 0.85rem 2.75rem;
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  transition: border-color var(--t-fast), box-shadow var(--t-fast), background var(--t-fast);
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  caret-color: var(--orange);
+}
+
+.form-input.no-icon,
+.form-select.no-icon {
+  padding-left: 1rem;
+}
+
+.form-input::placeholder { color: var(--ash); }
+
+.form-input:focus,
+.form-select:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(255,92,26,0.1);
+  background: var(--charcoal);
+}
+
+/* Select chevron */
+.select-wrap {
+  position: relative;
+}
+
+.select-chevron {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--ash);
+  transition: color var(--t-fast), transform var(--t-fast);
+}
+
+.form-field:focus-within .select-chevron {
+  color: var(--orange);
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* ── Teammate Rows ────────────────────────────────────────────────────────── */
+.teammates-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.teammate-row {
+  background: var(--black-soft);
+  padding: 1.25rem 1.5rem;
+  display: grid;
+  grid-template-columns: 1.8fr 1fr 1fr auto;
+  gap: 1rem;
+  align-items: end;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: background var(--t-fast);
+  animation: fadeUp 0.4s var(--ease-out-back) both;
+  position: relative;
+}
+
+/* Accent left bar on each row */
+.teammate-row::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 0;
+  height: 100%;
+  background: var(--orange);
+  opacity: 0.03;
+  transition: width var(--t-med);
+}
+
+.teammate-row:hover { background: var(--charcoal); }
+.teammate-row:hover::before { width: 100%; }
+.teammate-row:last-child { border-bottom: none; }
+
+.teammate-row-num {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  color: var(--orange);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.35rem;
+  display: block;
+}
+
+/* Remove button */
+.btn-remove-tm {
+  width: 38px;
+  height: 38px;
+  background: rgba(255,61,61,0.08);
+  border: 1px solid rgba(255,61,61,0.2);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FF5C5C;
+  flex-shrink: 0;
+  transition: background var(--t-fast), border-color var(--t-fast), color var(--t-fast), transform var(--t-fast);
+}
+
+.btn-remove-tm:hover:not(:disabled) {
+  background: rgba(255,61,61,0.2);
+  border-color: #FF5C5C;
+  transform: scale(1.08);
+}
+
+.btn-remove-tm:disabled {
+  opacity: 0.28;
+  cursor: not-allowed;
+}
+
+/* Add teammate button */
+.btn-add-teammate {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.25rem;
+  padding: 0.85rem 1.75rem;
+  border: 1.5px dashed rgba(255,92,26,0.35);
+  border-radius: 3px;
+  background: transparent;
+  color: var(--orange);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: background var(--t-fast), border-color var(--t-fast), box-shadow var(--t-fast), transform var(--t-fast);
+}
+
+.btn-add-teammate:hover:not(:disabled) {
+  background: var(--orange-dim);
+  border-color: var(--orange);
+  border-style: solid;
+  box-shadow: 0 4px 16px rgba(255,92,26,0.15);
+  transform: translateY(-1px);
+}
+
+.btn-add-teammate:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ── Submit Section ───────────────────────────────────────────────────────── */
+.submit-section {
+  background: var(--black-muted);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 4px;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.submit-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: rgba(200,241,53,0.05);
+  border: 1px solid rgba(200,241,53,0.15);
+  border-radius: 3px;
+  width: 100%;
+}
+
+.submit-notice-icon { color: var(--lime); flex-shrink: 0; margin-top: 1px; }
+
+.submit-notice-text {
+  font-size: 0.85rem;
+  color: rgba(200,241,53,0.8);
+  line-height: 1.55;
+}
+
+.submit-notice-text strong { color: var(--lime); }
+
+.btn-submit-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.2rem 3.5rem;
+  background: var(--orange);
+  color: var(--white);
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--t-med), box-shadow var(--t-med);
+  animation: pulseOrange 3s ease-in-out 3s infinite;
+}
+
+.btn-submit-main::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--orange-warm) 0%, var(--orange-hot) 100%);
+  opacity: 0;
+  transition: opacity var(--t-fast);
+}
+
+.btn-submit-main:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: var(--orange-glow);
+}
+
+.btn-submit-main:hover::before { opacity: 1; }
+.btn-submit-main span, .btn-submit-main svg { position: relative; z-index: 1; }
+
+.btn-submit-main:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  animation: none;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ── Success Overlay ──────────────────────────────────────────────────────── */
+.success-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(10, 10, 8, 0.93);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--gutter);
+  backdrop-filter: blur(12px);
+  animation: fadeIn 0.35s var(--ease-out-expo) both;
+}
+
+.success-card {
+  background: var(--black-muted);
+  border: 1px solid var(--border-orange);
+  border-radius: 6px;
+  padding: 3.5rem;
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: scaleIn 0.5s var(--ease-out-back) 0.1s both;
+}
+
+/* Orange glow at top */
+.success-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--orange), transparent);
+}
+
+.success-icon-ring {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: var(--orange-dim);
+  border: 2px solid var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 2rem;
+  color: var(--orange);
+  animation: pulseOrange 2.5s ease-in-out infinite;
+}
+
+.success-title {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.success-message {
+  font-size: 0.95rem;
+  color: var(--fog);
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+
+.success-message strong { color: var(--orange); }
+
+.success-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-success-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 2rem;
+  background: var(--orange);
+  color: var(--white);
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 3px;
+  transition: transform var(--t-fast), box-shadow var(--t-fast);
+}
+
+.btn-success-home:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(255,92,26,0.4);
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .reg-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .reg-sidebar {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    order: -1;
+  }
+}
+
+@media (max-width: 680px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .form-grid-full { grid-column: 1; }
+  .teammate-row {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+  }
+  .teammate-row > div:first-child {
+    grid-column: 1 / -1;
+  }
+  .form-section-body { padding: 1.25rem; }
+  .submit-section { padding: 1.5rem; }
+  .success-card { padding: 2rem; }
+}
+
+@media (max-width: 480px) {
+  .teammate-row {
+    grid-template-columns: 1fr;
+  }
+  .btn-remove-tm { width: 100%; height: 36px; }
+}
